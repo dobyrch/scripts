@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+player=mpv
+"${player}" "$(xclip -o -selection clipboard)" || notify-send -i "${player}" 'Failed to stream video'

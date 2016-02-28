@@ -1,0 +1,8 @@
+#!/usr/bin/zsh
+
+sleep 1
+updates=( ${(f)"$(checkupdates | cut -d' ' -f1)"} )
+
+if (( ${#updates} )); then
+	notify-send -t 5000 -i 'package-upgrade' "Updates available (${#updates})" "${(F)updates}" &!
+fi

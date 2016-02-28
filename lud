@@ -1,0 +1,75 @@
+#!/usr/bin/python
+from bs4      import BeautifulSoup
+from datetime import datetime
+from datetime import timedelta
+from os       import linesep
+from re       import compile
+from urllib   import request
+from sys      import argv
+from sys      import stderr
+
+if len(argv) < 2:
+    stderr.write('lud: missing argument\n')
+    exit(1)
+elif argv[1] == '-r':
+    dining_hall = 'Rath'
+    days_open = 7
+elif argv[1] == '-c':
+    dining_hall = 'Cort'
+    days_open = 5
+elif argv[1] == '-b':
+   dining_hall = 'Brod'
+#elif argv[1] == '-a':
+#   dining_hall = 'Asa'
+else:
+    stderr.write('lud: invalid argument\n')
+    exit(1)
+
+
+right_now = datetime.now()
+last_monday = right_now - timedelta(days=right_now.weekday())
+
+base_url = 'http://www.lehighdining.com/'
+locations_html = request.urlopen(base_url + 'locations.html')
+locations_soup = BeautifulSoup(locations_html)
+
+menu_tags = locations_soup.find_all('a')
+week_of = compile(r'.*' + str(last_monday.month) + '/' + str(last_monday.day) + r'.*')
+for tag in menu_tags:
+    if tag.find(text=week_of) != None and dining_hall in tag['href']:
+        menu_url = base_url + tag['href']
+
+menu_html = request.urlopen(menu_url)
+menu_soup = BeautifulSoup(menu_html)
+
+ansi_color_code = 31
+col_index = 0
+current_menu = ''
+lunch_end = right_now.replace(hour=14, minute=0, second=0, microsecond=0)
+for row in menu_soup.find_all('tr'):
+    if len(row.find_all(text=compile(r'.*Lunch.*'))) > 0:
+        current_menu = 'lunch'
+    elif len(row.find_all(text=compile(r'.*Dinner.*'))) > 0:
+        current_menu = 'dinner'
+    elif len(row.find_all('td')) > 1:
+        col_index = 0
+        for cell in row.find_all('td'):
+            if col_index  == right_now.weekday() and (\
+            current_menu == 'lunch' and right_now < lunch_end or \
+            current_menu == 'dinner' and right_now >= lunch_end):
+                food = cell.findAll(text = True)
+                food = [dish for dish in food if dish != '\xa0' and dish != ' '  and dish[-1] != ':' and not '/' in dish]
+                if len(food) < 1:
+                    continue
+                if food[-1] == '\n':
+                    food[-1] = ''
+                food = ''.join(food)
+                food = food.lstrip().rstrip()
+                food = food.replace('\n ', '\n')
+                #for char in food:
+                #    print(char, ord(char))
+                food = '\033[1;%sm'+food+'\033[0m'
+                food = food % ansi_color_code
+                print(food);
+                ansi_color_code += 1
+            col_index += 1

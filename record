@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+
+CHANNEL="${HOME}/Videos/TV/Channels/$(basename ${1-NULL} .xspf).xspf"
+DURATION=${2-60}
+PID=-1
+
+if [ ! -f ${CHANNEL} ]; then
+	echo 'Channel not found'
+	exit 1
+fi
+
+OUTFILE="${HOME}/Videos/TV/Recorded/$(basename ${CHANNEL} .xspf)-$(date -I).mpg"
+nohup cvlc "${CHANNEL}" --sout "${OUTFILE}" &> /dev/null &
+PID=${!}
+
+at NOW + ${DURATION} MINUTE << HERE
+	if [ ${PID} != -1 ]; then
+		kill ${PID}
+	else
+		pkill vlc
+	fi
+HERE

@@ -1,0 +1,49 @@
+#!/bin/bash
+
+channel=${1}
+shift
+#mpv "dvb://${channel}" "${@}" --vo=opengl --cache=100000 --cache-backbuffer=100000 --hr-seek=yes --force-seekable --keep-open --title="${channel^^}"
+#exit
+outfile="/tmp/tv.mpg"
+
+rm -f "${outfile}"
+mpv "dvb://${channel}" "${@}" --vo=opengl --stream-dump="${outfile}" &!
+pid=${!}
+
+for i in {1..30}; do
+	sleep 1
+	if [[ -f "${outfile}" ]]; then
+		break
+	fi
+done
+
+if [[ -f "${outfile}" ]]; then
+	sleep 5
+	mpv --keep-open --vo=opengl "${outfile}" --title "${channel^^}"
+else
+	echo 'Could not tune to channel (timed out)' >&2
+fi
+
+kill ${pid}
+
+
+#CHANNEL="${HOME}/Videos/TV/Channels/$(basename ${1-NULL} .xspf).xspf"
+#DURATION=${2-60}
+#PID=-1
+#
+#if [ ! -f ${CHANNEL} ]; then
+#	echo 'Channel not found'
+#	exit 1
+#fi
+#
+#OUTFILE="/tmp/$(basename ${CHANNEL} .xspf)-$(date -I).mpg"
+#nohup cvlc "${CHANNEL}" --sout "${OUTFILE}" &> /dev/null &
+#PID=${!}
+#
+#at NOW + ${DURATION} MINUTE << HERE
+#	if [ ${PID} != -1 ]; then
+#		kill ${PID}
+#	else
+#		pkill vlc
+#	fi
+#HERE

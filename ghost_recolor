@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#echo -en "\e]P0002b36" # Black
+#echo -en "\e]P1dc322f" # Red
+#echo -en "\e]P2859900" # Green
+#echo -en "\e]P3b58900" # Yellow
+#echo -en "\e]P4268bd2" # Blue
+#echo -en "\e]P5d33682" # Magenta
+#echo -en "\e]P62aa198" # Cyan
+#echo -en "\e]P7eee8d5" # White
+#echo -en "\e]P8073642" # Bright Black
+#echo -en "\e]P9cb4b16" # Bright Red
+#echo -en "\e]PA586e75" # Bright Green
+#echo -en "\e]PB657b83" # Bright Yellow
+#echo -en "\e]PC839496" # Bright Blue
+#echo -en "\e]PD6c71c4" # Bright Magenta
+#echo -en "\e]PE93a1a1" # Bright Cyan
+#echo -en "\e]PFfdf6e3" # Bright White
+echo -en "\e[H\e[J"
+
+f=3 b=4
+for j in f b; do
+  for i in {0..7}; do
+    printf -v $j$i %b "\e[${!j}${i}m"
+  done
+done
+bld=$'\e[1m'
+rst=$'\e[0m'
+
+cat << EOF
+
+                                                                                                 ${f4}/\\\\ ${rst}${bld}${f7}ARCH${rst} ${f4}LINUX${rst}
+                                                                                               powered by pacman
+
+                                                                 $f3▄▄█████▄▄$rst                                                              $bld$f1▄▄████▄▄$rst
+                                                                $f3███████████$rst                          ▄████▄                           $bld$f1▄██████████▄$rst
+                                                               $f3███████▀▀▀$rst      ▄▄      ▄▄      ▄▄   ████████   ▄▄      ▄▄      ▄▄     $bld$f1$b7██▀  ▀██▀  ▀$rst
+                                                               $f3████▄▄▄$rst         ▀▀      ▀▀      ▀▀   ████████   ▀▀      ▀▀      ▀▀    $bld$f1███$rst$b7  $f4██$bld$f1██$rst$b7  $f4██$bld$f1█$rst
+                                                               $f3▀█████████▄▄$rst                          ▀████▀                          $bld$f1$b7████▄▄████▄▄██$rst
+                                                                $f3▀█████████▀$rst                                                          $bld$f1██████████████$rst
+                                                                   $f3▀▀▀▀▀$rst                                                             $bld$f1█▀ ▀██  ██▀ ▀█$rst
+EOF

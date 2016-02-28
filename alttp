@@ -1,0 +1,50 @@
+#!/bin/bash
+
+f=3 b=4
+for j in f b; do
+  for i in {0..7}; do
+    printf -v $j$i %b "\e[${!j}${i}m"
+  done
+done
+bld=$'\e[1m'
+rst=$'\e[0m'
+
+cat << EOF
+
+                           $f7██$f7██$rst
+                           $f7██$f7██$rst
+                           $f7██$f7██$rst
+                           $f7██$f7██$rst
+                           $f7██$f7██$rst
+                           $f7██$f7██$rst
+                           $f7██$f7██$rst
+                           $f7██$f7██$rst
+                         $bld$f0██$rst$f7██$f7██$bld$f0██$rst$rst
+                       $bld$f0██$rst$f4██$f4██$f4██$f4██$bld$f0██$rst$rst
+                         $bld$f0██$rst$f4██$f4██$bld$f0██$rst$rst
+                         $bld$f0██$rst$f4██$f4██$bld$f0██$rst$rst
+         $f0██$f0██$f0██$f0██$rst          $bld$f0██$rst$bld$f0██$rst$rst
+       $f0██$f2██$f2██$f2██$f2██$f0██$f0██$f0██$rst  $f0██$bld$f1██$rst$bld$f1██$rst$f0██$rst
+     $f0██$f2██$bld$f2██$rst$bld$f2██$rst$bld$f2██$rst$f2██$f2██$bld$f5██$rst$bld$f5██$rst$f0██$bld$f1██$rst$f3██$f3██$f0██$rst
+   $f0██$f2██$bld$f2██$rst$bld$f2██$rst$f2██$f2██$f2██$bld$f5██$rst$bld$f5██$rst$f0██$f5██$f0██$f0██$f0██$f0██$rst
+   $f0██$f2██$bld$f2██$rst$f2██$f2██$bld$f5██$rst$bld$f5██$rst$bld$f5██$rst$f0██$f5██$f5██$f0██$bld$f4██$rst$bld$f4██$rst$f0██$rst
+ $f0██$f2██$f2██$f0██$bld$f5██$rst$bld$f5██$rst$f0██$f0██$f0██$f5██$f5██$f5██$f0██$bld$f4██$rst$bld$f4██$rst$f0██$rst
+ $f0██$f2██$f0██$bld$f1██$rst$f0██$f0██$f5██$f5██$f5██$f5██$f0██$f0██$f3██$f0██$bld$f4██$rst$f0██$rst
+ $f0██$f2██$f0██$f3██$bld$f1██$rst$f0██$f5██$f5██$f0██$f0██$f3██$f0██$f3██$f0██$bld$f4██$rst$f0██$rst
+ $f0██$f2██$f0██$f3██$f3██$f0██$f5██$f0██$bld$f7██$rst$f0██$bld$f1██$rst$bld$f7██$rst$f3██$f0██$bld$f4██$rst$f0██$rst
+ $f0██$f2██$f2██$f0██$f3██$f3██$f0██$f3██$bld$f7██$rst$f0██$bld$f1██$rst$bld$f1██$rst$f3██$f0██$bld$f4██$rst$f0██$rst
+   $f0██$f0██$f0██$f0██$f3██$f3██$bld$f1██$rst$bld$f7██$rst$bld$f7██$rst$bld$f1██$rst$f3██$f0██$bld$f4██$rst$f0██$rst
+     $bld$f0██$rst$bld$f0██$rst$bld$f4██$rst$f0██$f0██$f3██$f3██$f3██$f3██$f0██$f0██$bld$f4██$rst$f0██$rst
+   $bld$f0██$rst$f4██$bld$f0██$rst$bld$f4██$rst$f0██$f6██$f0██$f0██$f0██$f0██$bld$f6██$rst$bld$f6██$rst$f0██$rst
+ $bld$f0██$rst$f4██$f7██$bld$f0██$rst$bld$f4██$rst$bld$f4██$rst$f0██$f6██$bld$f6██$rst$bld$f6██$rst$bld$f6██$rst$f6██$bld$f6██$rst$f0██$rst
+ $bld$f0██$rst$f7██$f7██$bld$f0██$rst$f0██$f0██$f0██$bld$f6██$rst$f6██$f6██$f6██$bld$f6██$rst$f0██$bld$f3██$rst$f0██$rst
+ $bld$f0██$rst$f7██$f7██$bld$f0██$rst$bld$f1██$rst$bld$f1██$rst$f0██$bld$f6██$rst$bld$f6██$rst$f6██$bld$f6██$rst$bld$f6██$rst$bld$f3██$rst$bld$f3██$rst$f0██$rst
+ $bld$f0██$rst$f7██$f7██$rst$bld$f0██$rst$f3██$bld$f1██$rst$f0██$f0██$bld$f6██$rst$bld$f6██$rst$bld$f3██$rst$bld$f3██$rst$bld$f6██$rst$bld$f6██$rst$f0██$rst
+ $bld$f0██$rst$f4██$f7██$bld$f0██$rst$f3██$f0██$bld$f6██$rst$bld$f3██$rst$bld$f3██$rst$bld$f3██$rst$bld$f6██$rst$bld$f6██$rst$f0██$f0██$f1██$f0██$rst
+ $bld$f0██$rst$f4██$f4██$bld$f0██$rst$f0██$f0██$f0██$bld$f6██$rst$bld$f6██$rst$bld$f6██$rst$f0██$f0██$f1██$f1██$bld$f5██$rst$f0██$rst
+   $bld$f0██$rst$f4██$bld$f0██$rst$f3██$f3██$f0██$f0██$f0██$f0██$f0██$f0██$f0██$f0██$f0██$rst
+   $f0██$bld$f0██$rst$bld$f0██$rst$f1██$bld$f1██$rst$f3██$f1██$f0██$f0██$f0██$f0██$f0██$rst
+     $f0██$bld$f5██$rst$bld$f5██$rst$f1██$f1██$f0██$f0██$f0██$f0██$f0██$rst
+       $f0██$f0██$f0██$f0██$f0██$f0██$f0██$rst
+
+EOF

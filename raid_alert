@@ -1,0 +1,26 @@
+#!/usr/bin/bash
+
+EVENT=${1}
+DEVICE=${2}
+
+echo "$(date -Iminutes) ${EVENT} event detected on RAID device ${DEVICE}" >> ~bciadmin/raid_log
+
+trap exit SIGTERM SIGQUIT
+
+# Repeatedly emit audible beep to indicate failure
+echo_bell() {
+        while [ 1 ]
+        do
+            echo -en '\a' > /dev/console
+            sleep 5
+        done
+}
+
+if [[ "${EVENT}" == "Fail" ||
+      "${EVENT}" == "FailSpare" ||
+      "${EVENT}" == "DegradedArray" ||
+      "${EVENT}" == "TestMessage" ]] ; then
+
+    echo_bell &
+
+fi
