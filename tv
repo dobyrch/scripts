@@ -2,8 +2,6 @@
 
 channel=${1}
 shift
-#mpv "dvb://${channel}" "${@}" --vo=opengl --cache=100000 --cache-backbuffer=100000 --hr-seek=yes --force-seekable --keep-open --title="${channel^^}"
-#exit
 outfile="/tmp/tv.mpg"
 
 rm -f "${outfile}"
@@ -25,25 +23,4 @@ else
 fi
 
 kill ${pid}
-
-
-#CHANNEL="${HOME}/Videos/TV/Channels/$(basename ${1-NULL} .xspf).xspf"
-#DURATION=${2-60}
-#PID=-1
-#
-#if [ ! -f ${CHANNEL} ]; then
-#	echo 'Channel not found'
-#	exit 1
-#fi
-#
-#OUTFILE="/tmp/$(basename ${CHANNEL} .xspf)-$(date -I).mpg"
-#nohup cvlc "${CHANNEL}" --sout "${OUTFILE}" &> /dev/null &
-#PID=${!}
-#
-#at NOW + ${DURATION} MINUTE << HERE
-#	if [ ${PID} != -1 ]; then
-#		kill ${PID}
-#	else
-#		pkill vlc
-#	fi
-#HERE
+rm -f "${outfile}"
