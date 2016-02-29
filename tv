@@ -17,7 +17,7 @@ done
 
 if [[ -f "${outfile}" ]]; then
 	sleep 5
-	mpv --keep-open --vo=opengl "${outfile}" --title "${channel:u}"
+	mpv --keep-open "${outfile}" --title "${channel:u}"
 else
 	echo 'Could not tune to channel (timed out)' >&2
 fi
