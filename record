@@ -1,18 +1,17 @@
 #!/usr/bin/zsh
 
-program=${0}
 channel=${1}
 typeset -i duration=${2}
 
 if (( duration <= 0 )); then
 	echo "Invalid duration '${2}'" >&2
-	echo "Usage: ${program:t} CHANNEL MINUTES" >&2
+	echo "Usage: ${0:t} CHANNEL MINUTES [OPTIONS]" >&2
 	exit 1
 fi
 
-shift
+shift 2
 outfile="${HOME}/Videos/TV/Recorded/${channel}_$(date -I).mpg"
-mpv "dvb://${channel}" "${@}" --vo=opengl --stream-dump="${outfile}" &!
+mpv "dvb://${channel}" "${@}" --stream-dump="${outfile}" &!
 pid=${!}
 
 at now + "${duration}" minutes << HERE

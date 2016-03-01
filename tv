@@ -1,11 +1,16 @@
 #!/bin/zsh
 
 channel=${1}
+
+if [[ -z "${channel}" ]]; then
+	echo "Usage: ${0:t} CHANNEL [OPTIONS]" >&2
+	exit 1
+fi
+
 shift
 outfile="/tmp/tv.mpg"
-
 rm -f "${outfile}"
-mpv "dvb://${channel}" "${@}" --vo=opengl --stream-dump="${outfile}" &!
+mpv "dvb://${channel}" "${@}" --stream-dump="${outfile}" &!
 pid=${!}
 
 for i in {1..20}; do
