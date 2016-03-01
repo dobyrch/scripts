@@ -8,7 +8,7 @@ rm -f "${outfile}"
 mpv "dvb://${channel}" "${@}" --vo=opengl --stream-dump="${outfile}" &!
 pid=${!}
 
-for i in {1..30}; do
+for i in {1..20}; do
 	sleep 1
 	if [[ -f "${outfile}" ]]; then
 		break
