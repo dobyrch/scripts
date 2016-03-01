@@ -1,0 +1,9 @@
+#!/usr/bin/zsh
+
+if [[ ${1:u} == 'UP' ]]; then
+	pactl -- set-sink-volume 0 +5%
+elif [[ ${1:u} == 'DOWN' ]]; then
+	pactl -- set-sink-volume 0 -5%
+else
+	exit 1
+fi
