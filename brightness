@@ -1,0 +1,14 @@
+#!/usr/bin/zsh
+
+brightness_f='/sys/class/backlight/nv_backlight/brightness'
+brightness=$(< "${brightness_f}")
+inc=10
+
+if [[ ${1:u} == 'UP' ]]; then
+	echo $(( brightness + inc )) > "${brightness_f}"
+elif [[ ${1:u} == 'DOWN' ]]; then
+	echo $(( brightness - inc )) > "${brightness_f}"
+else
+	echo "Usage: ${0:t} {UP|DOWN}" >&2
+	exit 1
+fi

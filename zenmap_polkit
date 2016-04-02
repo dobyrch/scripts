@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ $(which pkexec) ]; then
+	pkexec "/usr/bin/zenmap" "$@"
+else
+	/usr/bin/zenmap "$@"
+fi

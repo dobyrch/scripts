@@ -1,0 +1,11 @@
+#!/usr/bin/zsh
+
+shuf ~/Projects/chajing/idioms \
+	| head -1 \
+	| tr '/;' '\n' \
+	| sed 's/^ \+//' \
+	| sed 's/(idiom)//g' \
+	| { if [[ ${TERM} == linux ]];
+		then sed 's/^[^[]*\[/[/';
+		else cat;
+	fi }

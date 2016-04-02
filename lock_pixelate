@@ -1,0 +1,7 @@
+#!/bin/bash
+
+tmpfile="$(mktemp --suffix .png)"
+import -silent -window root "${tmpfile}"
+mogrify -scale 5% -scale 2000% "${tmpfile}"
+i3lock -enui "${tmpfile}"
+rm "${tmpfile}"

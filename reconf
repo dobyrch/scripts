@@ -1,0 +1,2 @@
+pkill -USR1 sxhkd
+xrdb ~/.config/x11/Xresources
