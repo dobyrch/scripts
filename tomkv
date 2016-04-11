@@ -1,0 +1,13 @@
+#!/usr/bin/zsh
+
+in=${1:?No input specified}
+dir=${in:h}
+base=${in:t:r}
+ext=${in:e}
+
+if [[ "${ext}" == 'mkv' ]]; then
+	echo "${0:t}: Skipping ${base}.${ext}"
+	exit 1
+fi
+
+ffmpeg -i "${in}" -c copy "${dir}/${base}.mkv" && rm "${in}"
