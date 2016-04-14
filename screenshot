@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+tmpfile=$(mktemp --tmpdir='/tmp' --suffix='.png' "screenshot_$(date -I)_XXX")
+import -silent -window root "${tmpfile}"
