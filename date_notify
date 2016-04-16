@@ -1,0 +1,3 @@
+#!/usr/bin/zsh
+
+notify-send -i 'time-admin' -u low "$(date +'%B %e\n')" "$(date +'%l:%m %p')"
