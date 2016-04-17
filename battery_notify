@@ -1,0 +1,6 @@
+#!/usr/bin/zsh
+
+
+(( $(pgrep "${0:t}" -c) > 1)) && exit
+notify-send -i 'battery' -u low 'Battery Status:' "$(acpi -b | sed 's/Battery 0: //' | sed 's/%, /%\n/')"
+sleep 2
