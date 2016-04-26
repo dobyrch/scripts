@@ -5,7 +5,9 @@ from subprocess import Popen, PIPE
 query = ('bspc', 'query', '-T', '-n', 'focused')
 
 with Popen(query, stdout=PIPE, universal_newlines=True) as p:
-    rect = json.load(p.stdout)['client']['tiledRectangle']
+    attrs = json.load(p.stdout)
 
-split_dir = 'east' if rect['width'] >= rect['height'] else 'south'
-print('split_dir=', split_dir, sep='')
+if not attrs['presel']:
+    rect = attrs['client']['tiledRectangle']
+    split_dir = 'east' if rect['width'] >= rect['height'] else 'south'
+    print('split_dir=', split_dir, sep='')
