@@ -1,9 +1,0 @@
-#!/usr/bin/zsh
-
-zmodload zsh/net/socket
-
-zsocket /tmp/mpv-socket
-print -u "${REPLY}" '{"command": ["cycle", "pause"]}'
-read -ert 1 -u "${REPLY}"
-read -ert 1 -u "${REPLY}"
-exec {REPLY}>&-
