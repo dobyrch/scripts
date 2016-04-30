@@ -17,7 +17,8 @@ function send_command()
 
 
 case "${1:?No command specified}" in
-	(pause) send_command cycle pause
+	(pause)
+		send_command cycle pause
 		;;
 	(prev)
 		send_command playlist-prev weak
