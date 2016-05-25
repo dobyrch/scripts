@@ -1,6 +1,10 @@
 #!/usr/bin/zsh
 
-
 (( $(pgrep "${0:t}" -c) > 1)) && exit
-notify-send -i 'battery' -u low 'Battery Status' "$(acpi -b | sed 's/Battery 0: //' | sed 's/%, /%\n/')"
+
+charge=$(acpi --battery | grep -o '[0-9]*%')
+online=$(acpi --ac-adapter | grep -o '[^ ]*-line')
+
+
+notify-send -i 'battery' -u low 'Battery Status' "\n${charge}, ${online}"
 sleep 2
