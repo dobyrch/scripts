@@ -1,5 +1,5 @@
 #!/usr/bin/zsh
 
 (( $(pgrep "${0:t}" -c) > 1)) && exit
-notify-send -i 'time-admin' -u low "$(date +'%B %e\n')" "$(date +'%l:%M %p')"
+notify-send -i 'time-admin' -u low "$(date +'%B %e')" "$(date +'%A')\n$(date +'%l:%M %p')"
 sleep 2
