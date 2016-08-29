@@ -2,7 +2,7 @@
 
 brightness_f='/sys/class/backlight/nv_backlight/brightness'
 brightness=$(< "${brightness_f}")
-inc=10
+inc=5
 
 if [[ ${1:u} == 'UP' ]]; then
 	echo $(( brightness + inc )) > "${brightness_f}"
