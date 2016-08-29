@@ -1,0 +1,12 @@
+#!/usr/bin/zsh
+disk=$(dirname "${0}")/disk.qcow2
+
+if [[ ! -f "${disk}" ]]; then
+	qemu-img -f qcow2 "${disk}"
+fi
+
+if [[ ${1} ]]; then
+	discopts=( -cdrom "${1}" -boot order=d )
+fi
+
+qemu-system-x86_64 -enable-kvm -cpu host -smp 2 -vga vmware -m 2G ${discopts} "${disk}"
