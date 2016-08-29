@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-sleep 1
+sleep 2
 updates=( ${(f)"$(checkupdates | cut -d' ' -f1)"} )
 
 if (( ${#updates} )); then
