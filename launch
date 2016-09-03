@@ -2,7 +2,7 @@
 disk=$(dirname "${0}")/disk.qcow2
 
 if [[ ! -f "${disk}" ]]; then
-	qemu-img -f qcow2 "${disk}"
+	qemu-img create -f qcow2 "${disk}" 8G
 fi
 
 if [[ ${1} ]]; then
