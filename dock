@@ -1,0 +1,13 @@
+#!/usr/bin/zsh
+intern='LVDS-1'
+extern='VGA-2'
+
+if xrandr | grep -B1 '\*' | grep "${intern}" &&
+   xrandr | grep "${extern} connected"; then
+	xrandr --output "${intern}" --off --output "${extern}" --auto
+else
+	xrandr --output "${extern}" --off --output "${intern}" --auto
+fi
+
+rect="$(xrandr | awk '/\*/ {print $1}')+0+0"
+bspc monitor --rectangle "${rect}"
