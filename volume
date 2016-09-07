@@ -6,7 +6,9 @@ if [[ ${1:u} == 'UP' ]]; then
 	pactl -- set-sink-volume "${sink}" +5%
 elif [[ ${1:u} == 'DOWN' ]]; then
 	pactl -- set-sink-volume "${sink}" -5%
+elif [[ ${1:u} == 'MUTE' ]]; then
+	pactl -- set-sink-mute "${sink}" toggle
 else
-	echo "Usage: ${0:t} {UP|DOWN}" >&2
+	echo "Usage: ${0:t} {UP|DOWN|MUTE}" >&2
 	exit 1
 fi
