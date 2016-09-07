@@ -11,3 +11,4 @@ fi
 
 rect="$(xrandr | awk '/\*/ {print $1}')+0+0"
 bspc monitor --rectangle "${rect}"
+setbg
