@@ -1,0 +1,2 @@
+# Run with GALLIUM_HUD=help for more options
+GALLIUM_HUD=fps "${@}"
