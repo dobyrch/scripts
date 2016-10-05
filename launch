@@ -9,4 +9,4 @@ if [[ ${1} ]]; then
 	discopts=( -cdrom "${1}" -boot order=d )
 fi
 
-qemu-system-x86_64 -enable-kvm -cpu host -smp 2 -vga vmware -m 2G ${discopts} "${disk}"
+qemu-system-x86_64 -enable-kvm -cpu host -smp 2 -m 2G -vga vmware -usbdevice mouse ${discopts} "${disk}"
