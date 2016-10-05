@@ -1,13 +1,17 @@
 #!/usr/bin/zsh
 
-in=${1:?No input specified}
-dir=${in:h}
-base=${in:t:r}
-ext=${in:e}
+while [[ -n "${1}" ]]; do
+	file=${1}
+	dir=${file:h}
+	base=${file:t:r}
+	ext=${file:e}
 
-if [[ "${ext}" == 'mkv' ]]; then
-	echo "${0:t}: Skipping ${base}.${ext}"
-	exit 1
-fi
+	if [[ "${ext}" == 'mkv' ]]; then
+		echo "${0:t}: Skipping ${base}.${ext}"
+		exit 1
+	fi
 
-ffmpeg -i "${in}" -c copy "${dir}/${base}.mkv" && rm "${in}"
+	ffmpeg -i "${file}" -c copy "${dir}/${base}.mkv" && rm "${file}"
+
+	shift
+done
