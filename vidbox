@@ -1,0 +1,1 @@
+mpv tv:// --tv-driver=v4l2 --tv-device=/dev/video0 --tv-audiorate=48000 --tv-immediatemode=no --tv-forceaudio --tv-alsa --tv-adevice=hw.1 --tv-buffersize=64 --tv-normid=0 "${@}"
