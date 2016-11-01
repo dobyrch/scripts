@@ -1,2 +1,2 @@
 #!/usr/bin/sh
-mpv --force-window "$(xclip -o -selection clipboard)" || notify-send -i 'totem' ' ' '<b>Failed to stream video</b>'
+mpv --force-window=immediate "$(xclip -o -selection clipboard)" || notify-send -i 'totem' ' ' '<b>Failed to stream video</b>'
