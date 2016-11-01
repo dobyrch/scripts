@@ -1,13 +1,12 @@
 #!/usr/bin/zsh
 
-brightness_f='/sys/class/backlight/nv_backlight/brightness'
+brightness_f='/sys/class/backlight/acpi_video0/brightness'
 brightness=$(< "${brightness_f}")
-inc=5
 
 if [[ ${1:u} == 'UP' ]]; then
-	echo $(( brightness + inc )) > "${brightness_f}"
+	echo $(( brightness + 1 )) > "${brightness_f}"
 elif [[ ${1:u} == 'DOWN' ]]; then
-	echo $(( brightness - inc )) > "${brightness_f}"
+	echo $(( brightness - 1 )) > "${brightness_f}"
 else
 	echo "Usage: ${0:t} {UP|DOWN}" >&2
 	exit 1
