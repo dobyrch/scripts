@@ -4,5 +4,5 @@ sleep 2
 updates=( ${(f)"$(checkupdates | cut -d' ' -f1)"} )
 
 if (( ${#updates} )); then
-	notify-send -i 'package-upgrade' -u low "Updates available (${#updates})\n" "${(F)updates}" &!
+	notify-send -i _ -u low "Updates available (${#updates})" &!
 fi

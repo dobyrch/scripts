@@ -1,2 +1,2 @@
-ffmpeg -video_size 160x144 -framerate 60 -f x11grab -i :0.0 output.mkv
+ffmpeg -video_size 480x320 -framerate 24 -f x11grab -i :0.0 output.webm
 #ffmpeg -video_size 1024x768 -framerate 25 -f x11grab -i :0.0+100,200 -f pulse -ac 2 -i default output.mkv

@@ -6,5 +6,5 @@ charge=$(acpi --battery | grep -o '[0-9]*%')
 online=$(acpi --ac-adapter | grep -o '[^ ]*-line')
 
 
-notify-send -i 'battery' -u low 'Battery Status' "\n${charge}, ${online}"
+notify-send -i _ -u low 'Battery Status' "${charge}, ${online}"
 sleep 2

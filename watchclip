@@ -1,2 +1,3 @@
 #!/usr/bin/sh
-mpv --force-window=immediate "$(cutsel cut)" || notify-send -i 'totem' ' ' '<b>Failed to stream video</b>'
+selection=$(xclip -o -selection clipboard)
+mpv --force-window=immediate "${selection}" || notify-send -i 'totem' '<b>Failed to stream video</b>' "${selection}"
