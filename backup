@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+cd ~
+for src in Documents Music Pictures Projects Videos; do
+	printf '===== %s =====\n' "${src}"
+	rsync -az --info=progress2 "${HOME}/${src}/" "windows:/mnt/m/${src}"
+done
