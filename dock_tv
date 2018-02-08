@@ -3,12 +3,23 @@ intern='LVDS-1'
 extern='VGA-1'
 mode='1360x720'
 
-modeline=$(cvt ${(s:x:)mode} | awk '/Modeline/ {$1=$2=""; print $0}')
-xrandr --newmode "${mode}" ${=modeline}
-xrandr --addmode "${extern}" "${mode}"
+xrandr | awk "
+	/${intern}/ { output = 0 }
+	/${extern}/ { output = 1 }
+	/${mode}/ {
+		if (output)
+			exit 1
+	}
+"
 
-if xrandr | grep -B1 '\*' | grep "${intern}" &&
-   xrandr | grep "${extern} connected"; then
+if [[ $? == 0 ]]; then
+	modeline=$(cvt ${(s:x:)mode} | awk '/Modeline/ {$1=$2=""; print $0}')
+	xrandr --newmode "${mode}" ${=modeline}
+	xrandr --addmode "${extern}" "${mode}"
+fi
+
+if xrandr | grep -B1 '\*' | grep -q "${intern}" &&
+   xrandr | grep -q "${extern} connected"; then
 	xrandr --output "${intern}" --off --output "${extern}" --mode "${mode}"
 else
 	xrandr --output "${extern}" --off --output "${intern}" --auto
@@ -17,3 +28,5 @@ fi
 rect=$(xrandr | awk '/\*/ {print $1}')
 bspc monitor --rectangle "${rect}+0+0"
 setbg
+
+# xrandr --output "${intern}" --auto --right-of "${extern}"
