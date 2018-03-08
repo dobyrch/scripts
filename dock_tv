@@ -3,6 +3,8 @@ intern='LVDS-1'
 extern='VGA-1'
 mode='1360x720'
 
+nosleep
+
 xrandr | awk "
 	/${intern}/ { output = 0 }
 	/${extern}/ { output = 1 }
