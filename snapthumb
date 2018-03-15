@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+zmodload zsh/mapfile
+retro_dir="${HOME}/.config/retroarch"
+
+rm -r "${retro_dir}/thumbnails/"*
+
+for playlist in "${retro_dir}/playlists/"*; do
+	snap_dir="${retro_dir}/thumbnails/${playlist:t:r}/Named_Snaps"
+	mkdir -p "${snap_dir}"
+	lines=("${(f@)mapfile[${playlist}]}")
+
+	for ((i = 1; i < ${#lines}; i+=6 )); do
+		game_file="${lines[i]:t:r}"
+		game_title="${lines[i+1]}"
+
+		save="${retro_dir}/saves/${game_file}.state"
+		thumb="${snap_dir}/${game_title}"
+
+		for save in "${save}"{99..1} "${save}" "${save}.auto" ; do
+			if [[ -f "${save}" ]]; then
+				ln -sf "${save}.png" "${thumb}.png"
+				break
+			fi
+		done
+	done
+done
