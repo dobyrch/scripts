@@ -22,8 +22,10 @@ for game in "${games[@]}"; do
 		from="${states[((i-n))]}"
 		to="${game}${i%0}"
 
-		cp "${from}" "${to}"
-		cp "${from}.png" "${to}.png"
+		if [[ "${from}" != "${to}" ]]; then
+			cp "${from}" "${to}"
+			cp "${from}.png" "${to}.png"
+		fi
 	done
 
 	for (( i = n+1; i <= ${#states}; ++i )); do
