@@ -3,7 +3,7 @@
 channel=${1}
 
 if [[ -z "${channel}" ]]; then
-	echo "Usage: ${0:t} CHANNEL [OPTIONS]" >&2
+	print "Usage: ${0:t} CHANNEL [OPTIONS]" >&2
 	exit 1
 fi
 
@@ -24,7 +24,7 @@ if [[ -f "${outfile}" ]]; then
 	sleep 5
 	mpv --keep-open "${outfile}" --title "${channel:u}"
 else
-	echo 'Could not tune to channel (timed out)' >&2
+	print 'Could not tune to channel (timed out)' >&2
 fi
 
 kill ${pid}

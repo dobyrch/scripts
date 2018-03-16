@@ -4,8 +4,8 @@ channel=${1}
 typeset -i duration=${2}
 
 if (( duration <= 0 )); then
-	echo "Invalid duration '${2}'" >&2
-	echo "Usage: ${0:t} CHANNEL MINUTES [OPTIONS]" >&2
+	print "Invalid duration '${2}'" >&2
+	print "Usage: ${0:t} CHANNEL MINUTES [OPTIONS]" >&2
 	exit 1
 fi
 

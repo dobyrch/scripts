@@ -7,7 +7,7 @@ while [[ -n "${1}" ]]; do
 	ext=${file:e}
 
 	if [[ "${ext}" == 'mkv' ]]; then
-		echo "${0:t}: Skipping ${base}.${ext}"
+		print "${0:t}: Skipping ${base}.${ext}"
 		exit 1
 	fi
 

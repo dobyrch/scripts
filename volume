@@ -9,6 +9,6 @@ elif [[ ${1:u} == 'DOWN' ]]; then
 elif [[ ${1:u} == 'MUTE' ]]; then
 	pactl -- set-sink-mute "${sink}" toggle
 else
-	echo "Usage: ${0:t} {UP|DOWN|MUTE}" >&2
+	print "Usage: ${0:t} {UP|DOWN|MUTE}" >&2
 	exit 1
 fi

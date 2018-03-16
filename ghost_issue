@@ -1,22 +1,22 @@
 #!/bin/bash
 
-#echo -en "\e]P0002b36" # Black
-#echo -en "\e]P1dc322f" # Red
-#echo -en "\e]P2859900" # Green
-#echo -en "\e]P3b58900" # Yellow
-#echo -en "\e]P4268bd2" # Blue
-#echo -en "\e]P5d33682" # Magenta
-#echo -en "\e]P62aa198" # Cyan
-#echo -en "\e]P7eee8d5" # White
-#echo -en "\e]P8073642" # Bright Black
-#echo -en "\e]P9cb4b16" # Bright Red
-#echo -en "\e]PA586e75" # Bright Green
-#echo -en "\e]PB657b83" # Bright Yellow
-#echo -en "\e]PC839496" # Bright Blue
-#echo -en "\e]PD6c71c4" # Bright Magenta
-#echo -en "\e]PE93a1a1" # Bright Cyan
-#echo -en "\e]PFfdf6e3" # Bright White
-echo -en "\e[H\e[J"
+#print -n "\e]P0002b36" # Black
+#print -n "\e]P1dc322f" # Red
+#print -n "\e]P2859900" # Green
+#print -n "\e]P3b58900" # Yellow
+#print -n "\e]P4268bd2" # Blue
+#print -n "\e]P5d33682" # Magenta
+#print -n "\e]P62aa198" # Cyan
+#print -n "\e]P7eee8d5" # White
+#print -n "\e]P8073642" # Bright Black
+#print -n "\e]P9cb4b16" # Bright Red
+#print -n "\e]PA586e75" # Bright Green
+#print -n "\e]PB657b83" # Bright Yellow
+#print -n "\e]PC839496" # Bright Blue
+#print -n "\e]PD6c71c4" # Bright Magenta
+#print -n "\e]PE93a1a1" # Bright Cyan
+#print -n "\e]PFfdf6e3" # Bright White
+print -n "\e[H\e[J"
 
 f=3 b=4
 for j in f b; do
