@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+setopt extended_glob
+save_dir="${HOME}/.config/retroarch/saves"
+
+# Rotate saves for games with more than ten states.
+# Keep the five most recent states.
+games=( "${save_dir}/"*.state<10-> )
+games=( "${(u)games[@]%%[0-9]*}" )
+
+for game in "${games[@]}"; do
+	# Sort adds a trailing NUL, so delete the last (empty) element
+	states=( "${(0)$(find "${game}"<-># -print0 | sort -zV)}" )
+	states[-1]=()
+
+	if (( ${#states} < 5 )); then
+		continue
+	fi
+
+	for (( i = 0; i < 5; ++i )); do
+		from="${states[((i-5))]}"
+		to="${game}${i%0}"
+
+		mv "${from}" "${to}"
+		mv "${from}.png" "${to}.png"
+	done
+
+	rm "${game}"<5->*
+done
