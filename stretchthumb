@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+save_dir="${HOME}/.config/retroarch/saves"
+
+for thumb in "${save_dir}"/*.png; do
+	size=$(identify -format '%wx%h' "${thumb}")
+
+	if [[ "${size}" = '160x210' ]]; then
+		mogrify -resize '260x210!' "${thumb}"
+	fi
+done
