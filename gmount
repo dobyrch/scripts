@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+url=$(gio mount -li | grep -A4 'Moto G (5) Plus' | grep -o 'mtp://.*')
+gio mount "${url:?Device not connected}"
