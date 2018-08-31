@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 intern='LVDS-1'
 extern='VGA-1'
-mode='1360x720'
+mode='1280x720'
 
 nosleep
 
