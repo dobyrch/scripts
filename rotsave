@@ -2,7 +2,7 @@
 setopt extended_glob
 setopt null_glob
 
-save_dir="${HOME}/.config/retroarch/saves"
+save_dir="${HOME}/.config/retroarch/states"
 # Delete all but the ten most recent savestates for each game
 n='10'
 
