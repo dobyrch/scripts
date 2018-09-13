@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 intern='LVDS-1'
-extern='VGA-2'
+extern='VGA-1'
 
 if xrandr | grep -B1 '\*' | grep "${intern}" &&
    xrandr | grep "${extern} connected"; then
