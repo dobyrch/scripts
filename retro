@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 retroarch "${@}"
 rotsave
-stretchthumb
-snapthumb
 
 # The current save state slot always changes and clutters our git diff,
 # so always reset it to the same value when retroarch exits.
