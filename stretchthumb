@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
-save_dir="${HOME}/.config/retroarch/saves"
+state_dir="${HOME}/.config/retroarch/states"
 
-for thumb in "${save_dir}"/*.png; do
+for thumb in "${state_dir}"/*.png; do
 	size=$(identify -format '%wx%h' "${thumb}")
 
 	if [[ "${size}" = '160x210' ]]; then

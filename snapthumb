@@ -14,12 +14,12 @@ for playlist in "${retro_dir}/playlists/"*; do
 		game_file="${lines[i]:t:r}"
 		game_title="${lines[i+1]}"
 
-		save="${retro_dir}/saves/${game_file}.state"
+		state="${retro_dir}/states/${game_file}.state"
 		thumb="${snap_dir}/${game_title}"
 
-		for save in "${save}"{99..1} "${save}" "${save}.auto" ; do
-			if [[ -f "${save}" ]]; then
-				ln -sf "${save}.png" "${thumb}.png"
+		for state in "${state}"{99..1} "${state}" "${state}.auto" ; do
+			if [[ -f "${state}" ]]; then
+				ln -sf "${state}.png" "${thumb}.png"
 				break
 			fi
 		done
