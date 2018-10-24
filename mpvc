@@ -1,39 +1,11 @@
 #!/usr/bin/zsh
 
 zmodload zsh/net/socket
+zsocket /tmp/mpv-socket || exit 1
 
+print -u "${REPLY}" '{"command": ["'${(j:",":)@}'"]}'
+while read -ert 1 -u "${REPLY}"; do
+	# Read all incoming messages
+done
 
-function send_command()
-{
-	zsocket /tmp/mpv-socket || exit 1
-
-	print -u "${REPLY}" '{"command": ["'${(j:",":)@}'"]}'
-	while read -ert 1 -u "${REPLY}"; do
-		# Read all incoming messages
-	done
-
-	exec {REPLY}>&-
-}
-
-
-case "${1:?No command specified}" in
-	(pause)
-		send_command set pause yes
-		;;
-	(unpause)
-		send_command set pause no
-		;;
-	(pause-toggle)
-		send_command cycle pause
-		;;
-	(prev)
-		send_command playlist-prev weak
-		;;
-	(next)
-		send_command playlist-next weak
-		;;
-	(*)
-		print "${0:t}: Unknown command '${1}'"
-		exit 1
-		;;
-esac
+exec {REPLY}>&-
