@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+7z l -slt -ba "${1}" |
+awk '/Path|CRC/ {$1=$2=""; print $0}' |
+sed 's/^\s*//' |
+tac | paste - - | tac
