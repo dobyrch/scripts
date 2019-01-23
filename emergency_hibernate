@@ -1,0 +1,17 @@
+#!/usr/bin/zsh
+
+integer online=$(< /sys/class/power_supply/ADP1/online)
+float energy_full=$(< /sys/class/power_supply/BAT1/energy_full)
+float energy_now=$(< /sys/class/power_supply/BAT1/energy_now)
+float energy_percent=$(( energy_now/energy_full * 100 ))
+
+if (( !online )); then
+	notify-send -u critical 'Power disconnected'
+	printf 'Power disconnected: %i%%\n' energy_percent
+
+	if (( energy_now/energy_max < 20 )); then
+		print 'Hibernating...'
+		systemctl hibernate
+	fi
+fi
+
