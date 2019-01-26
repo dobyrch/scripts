@@ -1,4 +1,8 @@
 #!/usr/bin/sh
+
+if xrandr | grep -B1 '\*' | grep 'VGA-1'; then
+	bspc rule -a mpv -o state=fullscreen desktop=^1
+fi
+
 selection=$(xclip -o -selection clipboard)
-bspc rule -a mpv -o state=fullscreen desktop=^1
 mpv --force-window=immediate "${selection}" || notify-send -i 'totem' '<b>Failed to stream video</b>' "${selection}"
