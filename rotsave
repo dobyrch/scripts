@@ -10,9 +10,7 @@ games=( "${save_dir}/"*.state<-># )
 games=( "${(u@)games%%<->}" )
 
 for game in "${games[@]}"; do
-	# Sort adds a trailing NUL, so delete the last (empty) element
-	states=( "${(0)$(find "${game}"<-># -print0 | sort -zV)}" )
-	states[-1]=()
+	states=( ${(0)"$(find "${game}"<-># -print0 | sort -zV)"} )
 
 	if (( ${#states} < ${n} )); then
 		continue
