@@ -1,6 +1,29 @@
-#!/usr/bin/env sh
-nosleep
-retroarch "${@}"
+#!/usr/bin/env zsh
+
+ext=$(7z l -ba "${1}" 2>/dev/null | head -n1 | sed 's/.*\.//')
+case "${ext}" in
+	a26) core='stella' ;;
+	gb)  core='gambatte' ;;
+	gbc) core='gambatte' ;;
+	gba) core='mgba' ;;
+	nes) core='mesen' ;;
+	fds) core='mesen' ;;
+	sfc) core='snes9x' ;;
+	vb)  core='mednafen_vb' ;;
+	z64) core='parallel_n64' ;;
+esac
+
+xset s off
+xset -dpms
+
+if [[ -v core ]]; then
+	retroarch -L "${HOME}/.config/retroarch/cores/${core}_libretro.so" "${1}"
+else
+	retroarch "${@}"
+fi
+
+xset s on
+xset +dpms
 rotsave
 
 # The current save state slot always changes and clutters our git diff,
