@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 
-ext=$(7z l -ba "${1}" 2>/dev/null | head -n1 | sed 's/.*\.//')
+ext="${1:e}"
+if [[ "${ext}" = (7z|zip) ]]; then
+	ext=$(7z l -ba "${1}" 2>/dev/null | head -n1 | sed 's/.*\.//')
+fi
+
 case "${ext}" in
 	a26) core='stella' ;;
 	gb)  core='gambatte' ;;
