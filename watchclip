@@ -5,4 +5,4 @@ if xrandr | grep -B1 '\*' | grep 'VGA-1'; then
 fi
 
 selection=$(xclip -o -selection clipboard)
-mpv --force-window=immediate "${selection}" || notify-send -i 'totem' '<b>Failed to stream video</b>' "${selection}"
+mpv --force-window=immediate "${selection}" || notify-send 'Failed to stream video'

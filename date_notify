@@ -1,5 +1,5 @@
 #!/usr/bin/zsh
 
 (( $(pgrep "${0:t}" -c) > 1)) && exit
-notify-send -i _ -u low "$(date +'%A') $(date +'%B %d') $(date +'%-I:%M %p')"
+notify-send -u low "$(date +'%A') $(date +'%B %d') $(date +'%-I:%M %p')"
 sleep 2
