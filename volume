@@ -2,11 +2,11 @@
 
 sink='alsa_output.pci-0000_00_1b.0.analog-stereo'
 
-if [[ ${1:u} == 'UP' ]]; then
+if [[ ${1:u} = 'UP' ]]; then
 	pactl -- set-sink-volume "${sink}" +5%
-elif [[ ${1:u} == 'DOWN' ]]; then
+elif [[ ${1:u} = 'DOWN' ]]; then
 	pactl -- set-sink-volume "${sink}" -5%
-elif [[ ${1:u} == 'MUTE' ]]; then
+elif [[ ${1:u} = 'MUTE' ]]; then
 	pactl -- set-sink-mute "${sink}" toggle
 else
 	print "Usage: ${0:t} {UP|DOWN|MUTE}" >&2

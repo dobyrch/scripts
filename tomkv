@@ -6,7 +6,7 @@ while [[ -n "${1}" ]]; do
 	base=${file:t:r}
 	ext=${file:e}
 
-	if [[ "${ext}" == 'mkv' ]]; then
+	if [[ "${ext}" = 'mkv' ]]; then
 		print "${0:t}: Skipping ${base}.${ext}"
 		exit 1
 	fi

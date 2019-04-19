@@ -5,7 +5,7 @@ shuf ~/Projects/chajing/idioms \
 	| tr '/;' '\n' \
 	| sed 's/^ \+//' \
 	| sed 's/(idiom)//g' \
-	| { if [[ ${TERM} == linux ]];
+	| { if [[ ${TERM} = linux ]];
 		then sed 's/^[^[]*\[/[/';
 		else cat;
 	fi }
