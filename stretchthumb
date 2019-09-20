@@ -2,10 +2,14 @@
 
 state_dir="${HOME}/.config/retroarch/states"
 
-for thumb in "${state_dir}"/*.png; do
+for thumb in "${state_dir}"/*.png*(om[1,100]); do
 	size=$(identify -format '%wx%h' "${thumb}")
 
 	if [[ "${size}" = '160x210' ]]; then
+		print "Stretching ${thumb}"
 		mogrify -resize '260x210!' "${thumb}"
+	elif [[ "${size}" = '640x240' ]]; then
+		print "Stretching ${thumb}"
+		mogrify -resize '480x240!' "${thumb}"
 	fi
 done
