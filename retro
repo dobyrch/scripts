@@ -20,6 +20,9 @@ esac
 xset s off
 xset -dpms
 
+stretchthumb_watch &
+trap "pkill -P ${!}" SIGINT SIGTERM EXIT
+
 if [[ -v core ]]; then
 	retroarch -L "${HOME}/.config/retroarch/cores/${core}_libretro.so" "${1}"
 else
@@ -32,6 +35,4 @@ xset +dpms
 # The current save state slot always changes and clutters our git diff,
 # so always reset it to the same value when retroarch exits.
 sed -i 's/^\(state_slot =\).*/\1 "9"/' ~/.config/retroarch/retroarch.cfg
-
 rotsave
-stretchthumb

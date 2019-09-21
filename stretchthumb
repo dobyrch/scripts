@@ -1,15 +1,13 @@
 #!/usr/bin/env zsh
 
-state_dir="${HOME}/.config/retroarch/states"
+thumb="${HOME}/.config/retroarch/states/${1}"
 
-for thumb in "${state_dir}"/*.png*(om[1,100]); do
-	size=$(identify -format '%wx%h' "${thumb}")
+size=$(identify -format '%wx%h' "${thumb}")
 
-	if [[ "${size}" = '160x210' ]]; then
-		print "Stretching ${thumb}"
-		mogrify -resize '260x210!' "${thumb}"
-	elif [[ "${size}" = '640x240' ]]; then
-		print "Stretching ${thumb}"
-		mogrify -resize '480x240!' "${thumb}"
-	fi
-done
+if [[ "${size}" = '160x210' ]]; then
+	print "Stretching ${thumb}"
+	mogrify -resize '260x210!' "${thumb}"
+elif [[ "${size}" = '640x240' ]]; then
+	print "Stretching ${thumb}"
+	mogrify -resize '320x240!' "${thumb}"
+fi
