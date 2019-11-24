@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+console=${1:?No console specified}
+
+cd ~/.config/retroarch/screenshots/
+
+tstamp='<000000-999999>'
+tstamp="-${tstamp}-${tstamp}"
+
+for f in *.png; do
+	mv "${f}" "${f/${~tstamp}.png/.png}"
+done
+
+mv -i *.png ../thumbnails/"${console}"/Named_Titles/
