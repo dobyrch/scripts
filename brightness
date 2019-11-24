@@ -1,18 +1,32 @@
 #!/usr/bin/zsh
+autoload zmathfunc && zmathfunc
 
-acpi_video='/sys/class/backlight/acpi_video0/brightness'
-nv_backlight='/sys/class/backlight/nv_backlight/brightness'
-brightness=$(< "${acpi_video}")
+acpi_video='/sys/class/backlight/acpi_video0'
+nv_backlight='/sys/class/backlight/nv_backlight'
+
+max_brightness=$(< "${acpi_video}/max_brightness")
+min_brightness=$(< "${acpi_video}/min_brightness")
+brightness=$(< "${acpi_video}/brightness")
 
 if [[ ${1:u} = 'UP' ]]; then
-	(( brightness++ ))
+	(( brightness = min(max_brightness, brightness + 1) ))
 elif [[ ${1:u} = 'DOWN' ]]; then
-	(( brightness-- ))
+	(( brightness = max(min_brightness, brightness - 1) ))
 else
 	print "Usage: ${0:t} {UP|DOWN}" >&2
 	exit 1
 fi
 
-print $(( brightness )) > "${acpi_video}"
-brightness=$(< "${acpi_video}")
-print $(( 30 + brightness*10 )) > "${nv_backlight}"
+case ${brightness} in
+(0)	nv_brightness=20;;
+(1)	nv_brightness=32;;
+(2)	nv_brightness=40;;
+(3)	nv_brightness=49;;
+(4)	nv_brightness=61;;
+(5)	nv_brightness=73;;
+(6)	nv_brightness=86;;
+(7)	nv_brightness=100;;
+esac
+
+print $(( nv_brightness )) > "${nv_backlight}/brightness"
+print $(( brightness )) > "${acpi_video}/brightness"
