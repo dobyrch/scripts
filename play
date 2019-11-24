@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-mpv --save-position-on-quit --keep-open=always --playlist="${HOME}/Videos/playlist"
