@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+
+volume=${1:?No volume specified}
+cd "${volume}"
+
+for page in *.jpg; do
+	res=$(identify -format '%wx%h' "${page}")
+	width=${res%%x*}
+	height=${res##*x}
+
+	if (( width > height )); then
+		print "${page}"
+
+		if [[ "${2}" == '-f' ]]; then
+			convert "${page}" -crop "50%x${height}" '%d.jpg'
+			mv 1.jpg "${page/-/a-}"
+			mv 0.jpg "${page/-/b-}"
+		fi
+	fi
+done

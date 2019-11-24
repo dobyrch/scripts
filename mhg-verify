@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+volume=${1:?No volume specified}
+cd "${volume}"
+
+file *.jpg | grep -v JPEG
+
+fdupes .
+
+(( n = $(ls -1q * | wc -l) - 2 ))
+(( m = $(wc -l < pages) - 2 ))
+
+if (( n < m )); then
+	print 'Some files missing!'
+fi
