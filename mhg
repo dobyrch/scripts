@@ -4,11 +4,13 @@ import os
 import re
 import subprocess
 import sys
+import time
 
 if len(sys.argv) != 2:
-    sys.exit(f'Usage: {sys.argv[0]} DIR')
+    sys.exit(f'Usage: mhg DIR')
 
 os.chdir(sys.argv[1])
+print('Fetching ', sys.argv[1], ' ...')
 
 with open('curl') as f:
     curl_template = f.read().rstrip('\n')
@@ -17,6 +19,19 @@ with open('pages') as f:
     pages = json.load(f)
 
 for i, page in enumerate(pages):
-    print(f'Fetching {page}')
-    curl = re.sub('(?<=/)[^/]+(?=\?)', page, curl_template, count=1) + f' --output {i:03}-{page}.jpg'
-    subprocess.run(curl, shell=True, check=True)
+    curl = re.sub('(?<=/)[^/]+(?=\?)', page, curl_template, count=1)
+    outfile = '{:03}-{}'.format(i, re.sub('.png$', '.jpg', page, flags=re.IGNORECASE))
+    curl += f'-sS --output {outfile}'
+
+    if os.path.exists(outfile):
+        print(f'{outfile} exists, skipping...')
+        continue
+
+    for _ in range(5):
+        subprocess.run(curl, shell=True, check=True)
+        if os.path.getsize(outfile) > 1000:
+            break;
+        time.sleep(3)
+    else:
+        os.remove(outfile)
+        sys.exit(f'Failed to fetch {sys.argv[1]}/{outfile}, giving up')

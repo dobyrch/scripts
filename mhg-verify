@@ -11,5 +11,5 @@ fdupes .
 (( m = $(wc -l < pages) - 2 ))
 
 if (( n < m )); then
-	print 'Some files missing!'
+	print "$((m - n)) files missing!"
 fi
