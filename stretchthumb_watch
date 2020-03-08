@@ -2,4 +2,4 @@
 
 state_dir="${HOME}/.config/retroarch/states"
 
-inotifywait -qm --event close_write --format '%f' "${state_dir}" | xargs -n 1 -d '\n' stretchthumb
+inotifywait -qm --event close_write --format '%f' "${state_dir}" | grep '\.png$' | xargs -n 1 -d '\n' stretchthumb
