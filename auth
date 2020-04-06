@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+account="${1:?No account specified}"
+password=$(pass "${account}/2fa")
+
+if [[ -n "${password}" ]]; then
+	oathtool --totp -b "${password}"
+fi
